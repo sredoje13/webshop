@@ -37,11 +37,11 @@ const[userdetails,setuserdetails]=useState({
     email:"",
     adresa:"",
     image:"",
-  
+    broj:381
 })
 let isfounduser;
 
-const isfound=allusers.find((item)=>item.email.trim()===userdetails.email)
+const isfound=allusers.find((item)=>item.email===userdetails.email.trim())
 if(isfound){
     isfounduser=true
     
@@ -116,7 +116,10 @@ dispatch(loginuser({password:userdetails.password, email:userdetails.email})).th
     }
 
     else{
-
+           if(userdetails.broj.length<11){
+            toast.error("Ukucajte dobar broj!")
+           }
+           else{
         if(isfounduser){
             toast.error("Korisnik sa ovim e-mailom vec postoji!!!",
             {
@@ -142,11 +145,11 @@ dispatch(loginuser({password:userdetails.password, email:userdetails.email})).th
               }
 
             )
-            setuserdetails({name:"",email:"", password:"",adresa:"", broj:null})
+            setuserdetails({name:"",email:"", password:"",adresa:"", broj:381})
         
                 
             
-        }
+        }}
     }
 
   
@@ -180,13 +183,8 @@ value={userdetails.broj} label='Broj telefona' sx={{marginTop:{md:3,xs:1}}} clas
 ...userdetails,broj:e.target.value
 
 })}} required/>}
-{ !islogin&&<div className="inputdiv"> 
-      <FileBase 
-multiple={false}
-type="file"
- onDone={({base64})=>{setuserdetails({...userdetails, image:base64})}} />
 
-      </div>}
+
 <Button sx={{ color:"white",
  backgroundColor:"purple", marginTop:{md:3,xs:1}, width:"20%"}}
   className={classes.button} type='submit'>OK</Button>
