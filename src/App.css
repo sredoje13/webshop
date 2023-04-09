@@ -12,6 +12,35 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+.activelink{
+  color:black;
+  border-bottom:1px solid black;
+
+ 
+}
+.link{text-decoration:none;
+}
+.link:focus{
+  color:rgb(230, 167, 230)
+}
+.inputdiv input[type="file" i]::-webkit-file-upload-button{
+
+  justify-content: center;
+  align-items:center;
+  width:auto;
+  margin-top: 30px;
+  font-size: x-large;
+  background-color: rgb(141, 100, 146);
+  color:white;
+  border:0px;
+  cursor:pointer
+}
+.inputdiv{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+}
 
 .App-header {
   background-color: #282c34;
