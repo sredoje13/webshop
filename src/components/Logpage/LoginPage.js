@@ -11,7 +11,6 @@ import { useHistory } from 'react-router-dom';
 import toast from 'react-hot-toast'
 import { useEffect } from 'react';
 import { getUsers } from './../redux/reduxthunk';
-import FileBase from 'react-file-base64'
 function LoginPage(props) {
     const dispatch=useDispatch()
 

@@ -60,7 +60,7 @@ const showtitlee=logindatas.user||logindatas.isadmin
         className={classes.divic} >
     
      { showtitlee&&<Typography variant="h5"
-     sx={{marginTop:{md:20,xs:-10},
+     sx={{marginTop:{md:5,sm:6,xs:-8},
      color:"rgb(158, 137, 188)",
   textAlign:"center",
      fontFamily:"'Merienda', cursive",
@@ -78,7 +78,7 @@ const showtitlee=logindatas.user||logindatas.isadmin
       aria-label="Platform"
       sx={{position:"relative", backgroundColor:"white",
        display:"flex", justifyContent:"center",
-       marginTop:{xs:"-50px", sm:"0px", md:"0px"}
+       marginTop:{xs:showtitlee?"20px":"-50px", sm:"50px", md:"0px"}
     }}
     >
       <ToggleButton

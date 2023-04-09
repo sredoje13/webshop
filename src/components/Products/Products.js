@@ -7,6 +7,8 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
 import { toast } from 'react-hot-toast';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
@@ -161,7 +163,15 @@ const unliker=(item)=>{
   return isliked
 }
 
-
+function getcomm(item){
+  setshowcomment(true);
+        dispatch(reducerserver.productforcomment(item));
+        dispatch(reducerserver.getcomment(item))
+  window.scrollTo({
+    behavior: "smooth",
+    top: ref.current.offsetTop
+  });
+}
 
 
  allitem=items.map((item)=>(
@@ -194,15 +204,7 @@ const unliker=(item)=>{
           width:"40%",
           fontSize:{xs:"xx-small",sm:"medium",md:"large"},
           backgroundColor:purple[100]}}
-         onClick={()=>{setshowcomment(true);
-        dispatch(reducerserver.productforcomment(item));
-        dispatch(reducerserver.getcomment(item))
-        window.scrollTo({
-          behavior: "smooth",
-          top: ref.current.offsetTop
-        });
-      
-        }}>Komentari</Button>
+         onClick={()=>getcomm(item)}>Komentari</Button>
    <Button  sx={{color:purple[500],
          marginLeft:"10px",
          width:"40%",
@@ -237,8 +239,7 @@ const unliker=(item)=>{
      {(!issuser(item)||!isuser.user)&&<IconButton onClick={()=>likeitem(item)}
     
      disabled={!isuser.user}><ThumbUpOutlinedIcon sx={{fontSize:{xs:"medium",sm:"large", md:"x-large"}}}/></IconButton>}     
-        <IconButton disabled={!isuser.user}  onClick={()=>{setnoteditem(item);
-   setopennote(true)}}><ChatBubbleOutlineOutlinedIcon sx={{fontSize:{xs:"medium",sm:"large", md:"x-large"}}}/></IconButton>
+        <IconButton disabled={!isuser.user}  onClick={()=>getcomm(item)}><ChatBubbleOutlineOutlinedIcon sx={{fontSize:{xs:"medium",sm:"large", md:"x-large"}}}/></IconButton>
           {isuser.user&&unliker(item)&&<IconButton onClick={()=>unliked(item)} ><ThumbDownIcon sx={{fontSize:{xs:"medium",sm:"large", md:"x-large"}}}/></IconButton>}
         {(!unliker(item)||!isuser.user)&& <IconButton disabled={!isuser.user} onClick={()=>unliked(item)}><ThumbDownOutlinedIcon sx={{fontSize:{xs:"medium", sm:"large", md:"x-large"}}}/></IconButton>}      
         {!isadmin&&<Button sx={{color:purple[500],
@@ -264,9 +265,11 @@ const unliker=(item)=>{
           <Typography paragraph sx={{fontSize:{xs:"x-small",sm:"medium", md:"medium", color:purple[400]}}} >
           <b>{item.price} RSD</b> 
           </Typography>
-          <Typography paragraph>
+          <Typography paragraph sx={{display:"flex", width:"50%", justifyContent:"space-around"}}>
+            <Typography sx={{color:"purple", display:"flex", alignItems:"center"}}><FavoriteIcon/> {item.likes.length}</Typography>
+            <Typography sx={{color:"purple", display:"flex", alignItems:"center"}}><HeartBrokenIcon/>  {item.unlikes.length}</Typography>
            
-            
+          
           </Typography>
         
         </CardContent>
